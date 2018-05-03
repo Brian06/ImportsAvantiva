@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "importsavantica",
+  "private_key_id": "06e73967b1677249baf1c468a624effb9ffb3509",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC8vviw8GdmkJO1\nIjk6jjHDZhxCTFTTwRXZMpkU5pCiNhkpqG2knrWjV4QlhtlbixXQKIX5+bUTP5Md\niugf3ljHuU7XwHsSq+hObNQewhK7e5F5VBvBIi2XvQGvqHWPFCzoh7voJbxuqsK4\nMXNOxtZiHTsH3wDQM3bU5tjw+MdkIZrDjyZUpLd//4VpJUf2QnhlsTVtXvlGXKw6\nK01jwTk4x4+BIeUXiLMi29Ka7jaW0p14UkWcMMPHSU6V2Cw+f1CiD8l4lbtseiAU\neIoQ5klZQ5BQuZsil8psjgi0JV6PxJu1pEFHSet+DXYUuk3MYAKUSVenogP6d2UQ\nMwRNuDrnAgMBAAECggEABcqRNn0q8BsJRbt05Fa5hinKYAyG3Px0jkvajFP1aiGM\nAhrhFylB5NVZEYX4CtSPE6YP/lDRMGK9MKUQyzGIMhkofHsqtjs39Zoy+VOyLKVK\n191RzX1zcZxi03Vs6boY0Q46ul5xx3s85qx1wb4p2SOiMuqg1BfpwU2kyo1c7RxH\nushSR+5vADVQuCz7WZ0VE8ofuNVt+ok6x1Vo19JbFbDGNbuYsDcy54DKnelnLjfM\nMBpOodPRzSUPOMHn/SRux63ZbXKx2No5M3dVZ2TT+JJWmvqEX7JscvduaAZ0/C3f\nuUsCnQNVDp+KC0/mDlE631Il8KOf9YdjMPMU51vQKQKBgQDrnDrsWlN5Osi4bDCQ\nsdBRyYOMRD21H4Zi/M/AydgcHyyEP5X72Nj8D6TBCXnA6NJObchW3G+Y9IAhmLd9\nryQz4i0OGQavezUW2IQLaEzyiFniPUgowMTHrb7RjzZ0wndOxfIUfqHmwuCzS7Ar\nqr+zETG4izU0TAMoepGN3A+d1QKBgQDNFH9zyTifORi0rXf9Gc1PF+v/ePvetVYf\neo96HLC4MrQNL5y65zKQdlM9SijlC9sMks5Utt7PObGyJIJRM+/0PiegRzXZ0K/O\nlagEGGwqh6D0t5iJWMTLAtMDPNvxazutKyp1kTdb0v2ODDTLThjHjZad1MFEjm4a\nImhNjlBHywKBgC5Te6p5YCxYCJtqemoY7FMIglsUF+YDGtNfziGkDmAJKSGftwfb\n7V4yXTyvdkceACv3ngqmMTMr7/2rH3kQ9NdWw3EgLpZWbWveiqgLjAWsFbBMSGHq\n9UYlvX1K4XQ3wGm2thCdjYvoCXJ3kV4kpqi42sPka0OrJnvRDcmM2W05AoGAbTT0\nJeFKcKeD+3rAgZxC01KGzrVLUq433W1zh/BNPtlpPfhTusexCnKoIuQh4M6uaASp\nMT1saudrM9TzPHCu395VVal2CLZzWEwje4LR3tf4ozg9Vy5ZJU4stfWrneSfk7h/\n1LluxEwXz5O6bWT6FxHT2dpYzLwX73zRFDOrln8CgYEA3cP+Q5yls+lqgR7l6svv\nu/B1KccUXzSkPzVfgjVD9xVwsg/izFBK3WLcNkg1N5kyw5AwR9o4joc5S8CT4pho\nZ89DFC1cHOqIVgeKGjBMk2wGt+c6grse7zZkgU92lXm8Xr4/YyKhG2k8OVjdaOwu\n0ljnaNM45J6UXPg/q6R8N0o=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-b7hlh@importsavantica.iam.gserviceaccount.com",
+  "client_id": "100465467566065097869",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-b7hlh%40importsavantica.iam.gserviceaccount.com"
+}

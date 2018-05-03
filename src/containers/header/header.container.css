@@ -1,0 +1,28 @@
+.darkNav {
+    background-color: #2F2D46;
+    border-radius: 0;
+    border: 3px solid #EF4023;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.darkNav a, .darkNav .whiteTxt {
+    color: white;
+}
+
+.darkNav span.icon-bar{
+    background-color: #EF4023;
+}
+
+.darkNav li>a:hover, .darkNav li>a:focus, .darkNav li.active > a,  .darkNav li.open > a {
+    background-color: #EF4023;
+}
+
+.click {
+    cursor: pointer;
+}
