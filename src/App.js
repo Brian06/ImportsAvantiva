@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './containers/header/header.container';
 import Login from './containers/login/login.container';
+import ProjectDetail from './containers/projectDetail/projectDetail.container';
+import ProjectList from './components/projectList/projectList.component';
+import ImportProject from './components/importProject/importProject.component';
+import Home from './components/home/home.component';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
@@ -9,8 +13,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-        <Route exact={true} path="/" component={Header}/>
-        <Route path="/login" component={Login}/>
+        <Header></Header>
         </div>
       </Router>
     );

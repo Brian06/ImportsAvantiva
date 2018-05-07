@@ -6,6 +6,7 @@ import { setLoggedUser } from '../../actions/index.actions';
 import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { baseApi } from '../../app.constants';
+import logo from '../../assets/logo.png'
 
 
 import { Field, reduxForm } from 'redux-form'
@@ -99,9 +100,10 @@ class Login extends Component {
         }
         
         return (
+            
             <div className="login-page">
                 <div className="form">
-                    <img src="logo.png" alt="Avantica" width="60%"/>
+                    <img src={ logo } alt="Avantica" width="60%"/>
                     <form className="login-form">
 
                         <FormGroup controlId="formBasicEmail"

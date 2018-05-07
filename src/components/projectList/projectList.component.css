@@ -1,0 +1,21 @@
+.noProjectsMsg {
+  margin-top: 0;
+  text-align: center;
+}
+
+.searchContainer>div {
+  z-index: 1;
+}
+
+.searchContainer .searchInput {
+  border-radius: 0;
+  border-color: #2F2D46;
+  color: #2F2D46;
+  border-right: 0;
+}
+
+.searchContainer .input-group-btn>button {
+  border-radius: 0;
+  background-color: #EF4023;
+  color: white;
+}
