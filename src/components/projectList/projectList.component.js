@@ -3,6 +3,7 @@ import './projectList.component.css';
 import axios from 'axios';
 import { baseApi } from '../../app.constants';
 import ProjectPreview from '../projectPreview/projectPreview.component';
+import { Link } from 'react-router-dom'
 
 class ProjectList extends Component {
 
@@ -41,7 +42,14 @@ class ProjectList extends Component {
 
     const showProjects = !projects.length ? (
       <div className="container-fluid">
-        <h2 className="noProjectsMsg">There is no proyects yet, to add please login and click on add project</h2>
+        <h3 className="noProjectsMsg">There is no proyects yet, to add please login and click on import project</h3>
+        <Link to={'/login'} style={{ textDecoration: 'none'}}>
+          <center>
+            <button className="btn loginButton noProjectsLogin" type="button">
+              Login
+            </button>
+          </center>
+        </Link>
       </div> 
     ) : (
       <div className="container-fluid">

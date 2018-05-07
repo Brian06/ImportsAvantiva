@@ -3,6 +3,9 @@ import './importProject.component.css';
 import axios from 'axios';
 import { baseApi } from '../../app.constants';
 import ProjectDetail from '../../containers/projectDetail/projectDetail.container';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 class ImportProject extends Component {
 
@@ -85,6 +88,11 @@ class ImportProject extends Component {
   }
 
   render() {
+    const { isUserLogged } = this.props;
+
+    if (!isUserLogged) {
+      return <Redirect to="/" />;
+    }
 
     const searchTicket = !this.state.existProject ? (
       <div className="container">
@@ -148,5 +156,11 @@ class ImportProject extends Component {
 
 }
 
+function mapStateToProps(state) {
+  return {
+      loggedUser: state.loggedUser,
+      isUserLogged: state.isUserLogged
+  };
+}
 
-export default ImportProject;
+export default connect(mapStateToProps)(ImportProject);

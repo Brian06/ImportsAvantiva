@@ -76,7 +76,6 @@ class Login extends Component {
             console.log(response)
             let data = response.data;
             if (data && data.successful) {
-              //this.$store.dispatch('setLoggedUser', data.user);
               this.props.setLoggedUser(data.user);
               this.setState({ email: '', password: '', redirect: true });
             } else {

@@ -75,11 +75,6 @@ class ProjectDetail extends Component {
         }
         return '';
     }
-     
-    //computed function  
-    /*isUserLogged() {
-        return this.props.isUserLogged;
-    }*/
 
     render() {
 

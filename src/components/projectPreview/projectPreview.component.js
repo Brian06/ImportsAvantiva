@@ -31,9 +31,11 @@ class ProjectPreview extends Component {
       <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4">
         <div className="container-fluid previewContainer">
           <div>
-          <h4 className="ellipsis title clickable"> 
+            <Link to={`/project/${project.id}`} style={{ textDecoration: 'none'}}> 
+              <h4 className="ellipsis title clickable" > 
                 { project.title }
-          </h4>    
+              </h4> 
+            </Link>   
           </div>
           <div className="body">
             <h5>{ project.mainTechnology } - { project.englishLevel } - { project.office }</h5>

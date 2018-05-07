@@ -5,7 +5,7 @@
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    position: fixed;
+    position: initial;
     top: 0;
     width: 100%;
     z-index: 2;
@@ -25,4 +25,8 @@
 
 .click {
     cursor: pointer;
+}
+
+.navbar-brand {
+    color: white;
 }
