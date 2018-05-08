@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './projectDetail.container.css';
 import axios from 'axios';
 import { baseApi } from '../../app.constants';
+import ReactLoading from 'react-loading';
 
 class ProjectDetail extends Component {
 
@@ -17,7 +18,6 @@ class ProjectDetail extends Component {
        this.sureDelete = this.sureDelete.bind(this);  
        this.deleteProject = this.deleteProject.bind(this);  
        this.startDate = this.startDate.bind(this);  
-       //this.isUserLogged = this.isUserLogged.bind(this);   
     }
     
     componentDidMount() {
@@ -26,7 +26,6 @@ class ProjectDetail extends Component {
 
     getProject(){
         if(!this.state.projectAux){
-            //this.$Progress.start();
             //TODO: get project by fsId, change api before
             axios.get(`${baseApi}/projects/${this.props.match.params.id}`)
               .then(response => {
@@ -35,10 +34,10 @@ class ProjectDetail extends Component {
                 if (!this.state.project) {
                   //this.$router.push({path: '/projects'});
                 }
-                //this.$Progress.finish();
+                
               })
               .catch(error => {
-                //this.$Progress.fail();
+
               });
         } else {
             //this.project = this.projectAux;
@@ -230,6 +229,9 @@ class ProjectDetail extends Component {
             <div>
             { !project ? (<div>
                     <h3 className="loading">Loading...</h3>
+                    <center>
+                    <ReactLoading type={'spin'} color={'red'} height={200} width={100} />
+                    </center>
                  </div>
             ) :  (
                 <div className="container">
