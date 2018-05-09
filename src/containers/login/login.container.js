@@ -6,14 +6,9 @@ import { setLoggedUser } from '../../actions/index.actions';
 import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { baseApi } from '../../app.constants';
-import logo from '../../assets/logo.png'
-
-
-import { Field, reduxForm } from 'redux-form'
-
+import logo from '../../assets/logo.png';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Redirect } from 'react-router-dom';
-
-
 
 class Login extends Component {
 
@@ -30,6 +25,7 @@ class Login extends Component {
     
        this.handleInputChange = this.handleInputChange.bind(this);   
        this.login = this.login.bind(this);
+       this.print = this.print.bind(this);
     }
 
     handleInputChange(event) {
@@ -67,72 +63,54 @@ class Login extends Component {
                passwordState === 'warning') ? false : true;
     }
 
+    print() {
+        
+    }
+
     login() {
         this.setState({ failedLogin: false });
-        let credentials = { userNameOrEmail: this.state.email, password: this.state.password };
-        //this.$Progress.start();
+        let credentials = { userNameOrEmail: this.props.email, password: this.props.password };
         axios.post(`${baseApi}/login`, credentials)
           .then(response => {
             console.log(response)
             let data = response.data;
             if (data && data.successful) {
               this.props.setLoggedUser(data.user);
-              this.setState({ email: '', password: '', redirect: true });
+              this.props.clearFields();
+              //this.setState({ email: '', password: '', redirect: true });
             } else {
               this.setState({ failedLogin: true, password: '' });
             }
-            //this.$Progress.finish();
           })
           .catch(error => {
             this.failedLogin = true; 
             this.setState({ password: '' });
-            //this.$Progress.fail();
           });
     }
-
-
 
     render() {
 
         if (this.state.redirect) {
             return <Redirect to="/" />;
         }
-        
+
+        //start redux form const
+        const { handleSubmit, email, password } = this.props;
+
         return (
-            
             <div className="login-page">
                 <div className="form">
                     <img src={ logo } alt="Avantica" width="60%"/>
-                    <form className="login-form">
-
-                        <FormGroup controlId="formBasicEmail"
-                            validationState={this.getValidationEmailState()}>
-                            <FormControl bsClass="form-group input"
-                                name="email"
-                                type="email"
-                                value={ this.state.email }
-                                placeholder="Email"
-                                onChange={this.handleInputChange}/>
-                            <FormControl.Feedback /> 
-                        </FormGroup>
-
-                        <FormGroup controlId="formBasicPassword"
-                            validationState={this.getValidationPasswordState()}>
-                            <FormControl bsClass="form-group input"
-                                name="password"
-                                type="password"
-                                value={ this.state.password }
-                                placeholder="Password"
-                                onChange={this.handleInputChange}/>
-                            <FormControl.Feedback /> 
-                        </FormGroup>
-                
-                        <Button bsClass="btn loginButton" disabled={this.setEnableButton()} onClick={ this.login }>login</Button>
-                        
+                    <form className="login-form" onSubmit={this.props.handleSubmit}>  
+                        <Field name="email" component={renderField} type="text" placeholder="Email"/>
+                        <Field name="password" component={renderField} type="password" placeholder="Password"/>
+                        <button className="btn loginButton"  type="submit" onSubmit={this.login}>Login</button> 
                     </form>
                 </div>
             </div>
         )
+
+        
     }
 
 }
@@ -148,10 +126,43 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ setLoggedUser:setLoggedUser }, dispatch);
 }
 
+//start redux form const
+const validate = values => {
+    const errors = {}
+    if (!values.email) {
+      errors.email = '*Required'
+    } 
+    if (!values.password) {
+      errors.password = '*Required'
+    }
+    return errors
+}
+
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+    <div>
+      <label>{label}</label>
+      <div>
+        <input {...input} className="form-group input" placeholder={label} type={type}/>
+        {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+      </div>
+    </div>
+)
+
+Login = reduxForm({
+    form: 'login', 
+    validate
+})(Login);
+
+const selector = formValueSelector('login')
+Login = connect(
+state => {
+    const { email, password } = selector(state, 'email', 'password')
+    return {
+    email,
+    password
+    }
+}
+)(Login)
+//redux form end
+
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
-
-
-
-
-
