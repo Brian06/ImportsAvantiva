@@ -76,8 +76,8 @@ class Login extends Component {
             let data = response.data;
             if (data && data.successful) {
               this.props.setLoggedUser(data.user);
-              this.props.clearFields();
-              //this.setState({ email: '', password: '', redirect: true });
+              this.props.reset();
+              this.setState({ redirect: true });
             } else {
               this.setState({ failedLogin: true, password: '' });
             }
@@ -101,10 +101,10 @@ class Login extends Component {
             <div className="login-page">
                 <div className="form">
                     <img src={ logo } alt="Avantica" width="60%"/>
-                    <form className="login-form" onSubmit={this.props.handleSubmit}>  
+                    <form className="login-form" onSubmit={handleSubmit(this.login)}>  
                         <Field name="email" component={renderField} type="text" placeholder="Email"/>
                         <Field name="password" component={renderField} type="password" placeholder="Password"/>
-                        <button className="btn loginButton"  type="submit" onSubmit={this.login}>Login</button> 
+                        <button className="btn loginButton" type="submit" >Login</button> 
                     </form>
                 </div>
             </div>
