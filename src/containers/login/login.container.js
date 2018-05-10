@@ -7,7 +7,7 @@ import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { baseApi } from '../../app.constants';
 import logo from '../../assets/logo.png';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form';
 import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
@@ -80,11 +80,19 @@ class Login extends Component {
               this.setState({ redirect: true });
             } else {
               this.setState({ failedLogin: true, password: '' });
+              throw new SubmissionError({
+                email: 'User does not exist',
+                _error: 'Login failed!'
+              })
             }
           })
           .catch(error => {
-            this.failedLogin = true; 
+            //this.failedLogin = true; 
             this.setState({ password: '' });
+            new SubmissionError({
+                email: 'User does not exist',
+                _error: 'Login failed!'
+              })
           });
     }
 
@@ -95,7 +103,7 @@ class Login extends Component {
         }
 
         //start redux form const
-        const { handleSubmit, email, password } = this.props;
+        const { error, pristine, submitting, handleSubmit, email, password } = this.props;
 
         return (
             <div className="login-page">
@@ -104,7 +112,10 @@ class Login extends Component {
                     <form className="login-form" onSubmit={handleSubmit(this.login)}>  
                         <Field name="email" component={renderField} type="text" placeholder="Email"/>
                         <Field name="password" component={renderField} type="password" placeholder="Password"/>
-                        <button className="btn loginButton" type="submit" >Login</button> 
+                        <div>
+                        {error && <div>{error.errors._error}</div>}
+                        </div>
+                        <button className="btn loginButton" type="submit" disabled={error || submitting} >Login</button> 
                     </form>
                 </div>
             </div>
