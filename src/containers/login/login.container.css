@@ -55,3 +55,8 @@
     color: red;
     text-align: left;
 }
+
+.disabled {
+    background: #7773a5;
+    cursor: default;
+}

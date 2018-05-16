@@ -70,7 +70,7 @@ class Login extends Component {
     login() {
         this.setState({ failedLogin: false });
         let credentials = { userNameOrEmail: this.props.email, password: this.props.password };
-        axios.post(`${baseApi}/login`, credentials)
+        return axios.post(`${baseApi}/login`, credentials)
           .then(response => {
             console.log(response)
             let data = response.data;
@@ -89,7 +89,7 @@ class Login extends Component {
           .catch(error => {
             //this.failedLogin = true; 
             this.setState({ password: '' });
-            new SubmissionError({
+            throw new SubmissionError({
                 email: 'User does not exist',
                 _error: 'Login failed!'
               })
@@ -109,12 +109,11 @@ class Login extends Component {
             <div className="login-page">
                 <div className="form">
                     <img src={ logo } alt="Avantica" width="60%"/>
-                    <form className="login-form" onSubmit={handleSubmit(this.login)}>  
+                    <form className="login-form" onSubmit={this.props.handleSubmit(this.login)}>  
                         <Field name="email" component={renderField} type="text" placeholder="Email"/>
                         <Field name="password" component={renderField} type="password" placeholder="Password"/>
-                        <div>
-                        {error && <div>{error.errors._error}</div>}
-                        </div>
+                        {error && <strong>{error}</strong>}
+                        
                         <button className="btn loginButton" type="submit" disabled={error || submitting} >Login</button> 
                     </form>
                 </div>
