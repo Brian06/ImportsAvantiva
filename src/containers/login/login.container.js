@@ -9,6 +9,9 @@ import { baseApi } from '../../app.constants';
 import logo from '../../assets/logo.png';
 import { Field, reduxForm, formValueSelector, SubmissionError } from 'redux-form';
 import { Redirect } from 'react-router-dom';
+import TextField from 'material-ui/TextField';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {orange500, blue500} from 'material-ui/styles/colors';
 
 class Login extends Component {
 
@@ -96,6 +99,8 @@ class Login extends Component {
           });
     }
 
+    
+
     render() {
 
         if (this.state.redirect) {
@@ -110,10 +115,9 @@ class Login extends Component {
                 <div className="form">
                     <img src={ logo } alt="Avantica" width="60%"/>
                     <form className="login-form" onSubmit={this.props.handleSubmit(this.login)}>  
-                        <Field name="email" component={renderField} type="text" placeholder="Email"/>
-                        <Field name="password" component={renderField} type="password" placeholder="Password"/>
+                        <Field name="email" component={renderFieldInputs} type="text" label="Email/UserName"/>
+                        <Field name="password" component={renderFieldPassword} type="password" label="Password"/>
                         {error && <strong>{error}</strong>}
-                        
                         <button className="btn loginButton" type="submit" disabled={error || submitting} >Login</button> 
                     </form>
                 </div>
@@ -148,13 +152,47 @@ const validate = values => {
     return errors
 }
 
-const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+const styles = {
+    hintStyle: {
+        'WebkitTextSecurity': 'disc',
+    }
+  };
+
+  
+
+const renderFieldInputs = ({ name, input, label, type, meta: { touched, error, warning }, ...custom }) => (
     <div>
-      <label>{label}</label>
-      <div>
-        <input {...input} className="form-group input" placeholder={label} type={type}/>
-        {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
-      </div>
+        <MuiThemeProvider>
+            <div>
+            <TextField 
+            hintText="Hint Text"
+            floatingLabelText={label}
+            errorText={touched && error}
+            {...input}
+            {...custom}
+            />
+            </div>
+        </MuiThemeProvider>
+      
+    </div>
+)
+
+const renderFieldPassword = ({ name, input, label, type, meta: { touched, error, warning }, ...custom }) => (
+    <div>
+        <MuiThemeProvider>
+            <div>
+            <TextField 
+            hintText="Hint Text"
+            errorText={touched && error}
+            floatingLabelText={label}
+            inputStyle={styles.hintStyle}
+            {...input}
+            {...custom}
+            />
+            </div>
+        </MuiThemeProvider>
+        
+
     </div>
 )
 
