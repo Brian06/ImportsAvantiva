@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import './importProject.component.css';
-import axios from 'axios';
 import { baseApi } from '../../app.constants';
-import ProjectDetail from '../../containers/projectDetail/projectDetail.container';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
+import ProjectDetail from '../../containers/projectDetail/projectDetail.container';
+import './importProject.component.css';
 
 class ImportProject extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -18,11 +17,19 @@ class ImportProject extends Component {
       error: {}
     };
 
-   this.importProject = this.importProject.bind(this);   
-   this.cancel = this.cancel.bind(this);   
-   this.saveProject = this.saveProject.bind(this);   
-   this.closeError = this.closeError.bind(this);  
-   this.handleInputChange = this.handleInputChange.bind(this);  
+  this.importProject = this.importProject.bind(this);   
+  this.cancel = this.cancel.bind(this);   
+  this.saveProject = this.saveProject.bind(this);   
+  this.closeError = this.closeError.bind(this);  
+  this.handleInputChange = this.handleInputChange.bind(this);  
+  }
+
+  cancel(){
+    this.setState({ project: {}, existProject: {}, ticketNumber: '', error: {} });
+  }
+
+  closeError(){
+    this.setState({ error: {exist: false, message: '' } });
   }
 
   handleInputChange(event) {
@@ -37,54 +44,45 @@ class ImportProject extends Component {
 
   importProject() {
     if (this.state.ticketNumber.length) {
-      //this.$Progress.start();
       this.setState({ error: {} });
       axios.get(`${baseApi}/import/${this.state.ticketNumber}`)
-        .then(response => {
-          let data = response.data;
-          if (data) {
-            this.setState({ existProject: true, project: data })
-          } else {
-          }
-          //this.$Progress.finish();
-        })
-        .catch(error => {
+      .then(response => {
+        let data = response.data;
+        if (data) {
+          this.setState({ existProject: true, project: data })
+        } else {
           this.setState({ error: { exist: true, message: 'Ticket not found, please try again!' } });
-        });
+        }
+      })
+      .catch(error => {
+        console.log("error");
+        this.setState({ error: { exist: true, message: 'Ticket not found, please try again!' } });
+      });
     }
-  }
-
-  cancel(){
-    this.setState({ project: {}, existProject: {}, ticketNumber: '', error: {} });
   }
 
   saveProject() {
     if (this.state.ticketNumber.length) {
       this.setState({ error: {} });
-      //this.$Progress.start();
       let data = {
         project: this.state.project
       };
 
       axios.post(`${baseApi}/import`, this.state.project)
-        .then(response => {
-          let data = response.data;
-          if (data && !data.haveErrors) {
-            //this.$router.push({ path: '/projects' });
-          } else {
-            this.setState({ error: { exist: true, message: data.message } });
-          }
-          //this.$Progress.finish();
-        })
-        .catch(error => {
-          this.setState({ error: { exist: true, message: 'Something went wrong, please try again!' } });
-          //this.$Progress.fail();
-        });
+      .then(response => {
+        let data = response.data;
+        if (data && !data.haveErrors) {
+          //this.$router.push({ path: '/projects' });
+        } else {
+          this.setState({ error: { exist: true, message: data.message } });
+        }
+        //this.$Progress.finish();
+      })
+      .catch(error => {
+        this.setState({ error: { exist: true, message: 'Something went wrong, please try again!' } });
+        //this.$Progress.fail();
+      });
     }
-  }
-
-  closeError(){
-    this.setState({ error: {exist: false, message: '' } });
   }
 
   render() {

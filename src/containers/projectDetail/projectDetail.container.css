@@ -6,3 +6,21 @@
 .project-detail .row{
   margin-bottom: 15px;
 }
+
+.modal-center {
+  width: 100%;
+  margin: auto;
+  position: fixed;
+  top: 30%;
+  padding: 0 10px;
+}
+
+.modal-center button {
+  margin: 4px;
+}
+
+.errorText {
+  text-align: center;
+  font-size: small;
+  color: #EF4023
+}

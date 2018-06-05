@@ -8,7 +8,7 @@ module.exports = {
     {
       name: 'Admin',
       userName: 'admin',
-      password: '123456abC',
+      password: '123',
       email: 'admin@avantica.net'
     },
     {

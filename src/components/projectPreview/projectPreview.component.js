@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './projectPreview.component.css';
 import { Link } from 'react-router-dom';
+import './projectPreview.component.css';
+
 
 class ProjectPreview extends Component {
 
@@ -44,17 +45,13 @@ class ProjectPreview extends Component {
           { skills }
           <div className="footer">
             <Link to={`/project/${project.id}`}>
-              <button className="btn-review" style={{ textDecoration: 'none', color:'white'}}>
-                  View More
-              </button> 
+              <button className="btn-review" style={{ textDecoration: 'none', color:'white'}}>View More</button> 
             </Link>
           </div>
         </div>
       </div>
     )
   }
-
 }
-
 
 export default ProjectPreview;

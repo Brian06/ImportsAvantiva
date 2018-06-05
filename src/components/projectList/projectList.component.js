@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './projectList.component.css';
-import axios from 'axios';
 import { baseApi } from '../../app.constants';
-import ProjectPreview from '../projectPreview/projectPreview.component';
 import { Link } from 'react-router-dom'
 import ReactLoading from 'react-loading';
+import axios from 'axios';
+import ProjectPreview from '../projectPreview/projectPreview.component';
+import './projectList.component.css';
 
 class ProjectList extends Component {
 
@@ -16,23 +16,26 @@ class ProjectList extends Component {
       loading: true
     };
 
-   this.getProjects = this.getProjects.bind(this);   
-   this.filteredProjects = this.filteredProjects.bind(this);
-   this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
+  this.filteredProjects = this.filteredProjects.bind(this);
+  this.getProjects = this.getProjects.bind(this);   
+  this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
     this.getProjects();
+  }
+
+  filteredProjects(search) {
+    return this.state.projects.filter(project => {
+      return  (project.title && project.title.toLowerCase().indexOf(search.toLowerCase()) > -1) || // search by title
+              (project.mainTechnology && project.mainTechnology.toLowerCase().indexOf(search.toLowerCase()) > -1) || // search by mainTechnology
+              (project.maxPosition && project.maxPosition.toLowerCase().indexOf(search.toLowerCase()) > -1) || // search by maxPosition
+              (project.minPosition && project.minPosition.toLowerCase().indexOf(search.toLowerCase()) > -1) || // search by minPosition
+              (project.requirements && project.requirements.toLowerCase().indexOf(search.toLowerCase()) > -1) || // search by requirements
+              (project.client && project.client.toLowerCase().indexOf(search.toLowerCase()) > -1) || // search by client
+              (project.office && project.office.toLowerCase().indexOf(search.toLowerCase()) > -1) || // search by office
+              (project.englishLevel && project.englishLevel.toLowerCase().indexOf(search.toLowerCase()) > -1) // search by englishLevel
+    });
   }
 
   getProjects() {
@@ -46,17 +49,13 @@ class ProjectList extends Component {
         });
   }
 
-  //TODO client y office se deben validar
-  filteredProjects(search) {
-    return this.state.projects.filter(project => {
-      return project.title && project.title.toLowerCase().indexOf(search.toLowerCase()) > -1 || // search by title
-              project.mainTechnology && project.mainTechnology.toLowerCase().indexOf(search.toLowerCase()) > -1 || // search by mainTechnology
-              project.maxPosition && project.maxPosition.toLowerCase().indexOf(search.toLowerCase()) > -1 || // search by maxPosition
-              project.minPosition && project.minPosition.toLowerCase().indexOf(search.toLowerCase()) > -1 || // search by minPosition
-              project.requirements && project.requirements.toLowerCase().indexOf(search.toLowerCase()) > -1 || // search by requirements
-              project.client && project.client.toLowerCase().indexOf(search.toLowerCase()) > -1 || // search by client
-              project.office && project.office.toLowerCase().indexOf(search.toLowerCase()) > -1 || // search by office
-              project.englishLevel && project.englishLevel.toLowerCase().indexOf(search.toLowerCase()) > -1 // search by englishLevel
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
     });
   }
 
@@ -65,7 +64,6 @@ class ProjectList extends Component {
     const search = this.state.search;
     const filteredProjects = this.filteredProjects(search);
     
-
     const projects = filteredProjects.map((project) =>
       <ProjectPreview key={project.id} project={project}></ProjectPreview>
     );
@@ -75,9 +73,7 @@ class ProjectList extends Component {
         <h3 className="noProjectsMsg">There is no proyects yet, to add please login and click on import project</h3>
         <Link to={'/login'} style={{ textDecoration: 'none'}}>
           <center>
-            <button className="btn loginButton noProjectsLogin" type="button">
-              Login
-            </button>
+            <button className="btn loginButton noProjectsLogin" type="button">Login</button>
           </center>
         </Link>
       </div> 
@@ -121,7 +117,7 @@ class ProjectList extends Component {
           </div>
         ) :
         <div>
-        { showProjects }
+          { showProjects }
         </div>
         }
       </div>

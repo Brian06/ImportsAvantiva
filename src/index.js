@@ -12,8 +12,8 @@ import reducers from './reducers/index.reducers';
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducers)}>
-        <App />
-    </Provider>
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <App />
+  </Provider>
 , document.getElementById('root'));
 registerServiceWorker();
